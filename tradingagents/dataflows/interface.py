@@ -620,7 +620,7 @@ def get_YFin_data_window(
         df_string = filtered_data.to_string()
 
     return (
-        f"## Raw Market Data for {symbol} from {start_date} to {curr_date}:\n\n"
+        f"## Raw Market Data for {symbol} from {start_date} to {curr_date} (prices in USD):\n\n"
         + df_string
     )
 
@@ -660,7 +660,7 @@ def get_YFin_data_online(
     csv_string = data.to_csv()
 
     # Add header information
-    header = f"# Stock data for {symbol.upper()} from {start_date} to {end_date}\n"
+    header = f"# Stock data for {symbol.upper()} from {start_date} to {end_date} (prices in USD)\n"
     header += f"# Total records: {len(data)}\n"
     header += f"# Data retrieved on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
 

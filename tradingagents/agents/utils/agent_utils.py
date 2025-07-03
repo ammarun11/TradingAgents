@@ -122,18 +122,18 @@ class Toolkit:
     @staticmethod
     @tool
     def get_YFin_data(
-        symbol: Annotated[str, "ticker symbol of the company"],
+        symbol: Annotated[str, "ticker symbol of the company (e.g. AAPL, SHIB-USD)"],
         start_date: Annotated[str, "Start date in yyyy-mm-dd format"],
         end_date: Annotated[str, "End date in yyyy-mm-dd format"],
     ) -> str:
         """
-        Retrieve the stock price data for a given ticker symbol from Yahoo Finance.
+        Retrieve the stock/crypto price data for a given ticker symbol from Yahoo Finance (prices in USD).
         Args:
-            symbol (str): Ticker symbol of the company, e.g. AAPL, TSM
+            symbol (str): Ticker symbol of the company or crypto, e.g. AAPL, SHIB-USD
             start_date (str): Start date in yyyy-mm-dd format
             end_date (str): End date in yyyy-mm-dd format
         Returns:
-            str: A formatted dataframe containing the stock price data for the specified ticker symbol in the specified date range.
+            str: A formatted dataframe containing the price data in USD for the specified ticker symbol in the specified date range.
         """
 
         result_data = interface.get_YFin_data(symbol, start_date, end_date)
@@ -143,18 +143,18 @@ class Toolkit:
     @staticmethod
     @tool
     def get_YFin_data_online(
-        symbol: Annotated[str, "ticker symbol of the company"],
+        symbol: Annotated[str, "ticker symbol of the company (e.g. AAPL, SHIB-USD)"],
         start_date: Annotated[str, "Start date in yyyy-mm-dd format"],
         end_date: Annotated[str, "End date in yyyy-mm-dd format"],
     ) -> str:
         """
-        Retrieve the stock price data for a given ticker symbol from Yahoo Finance.
+        Retrieve the stock/crypto price data for a given ticker symbol from Yahoo Finance (prices in USD).
         Args:
-            symbol (str): Ticker symbol of the company, e.g. AAPL, TSM
+            symbol (str): Ticker symbol of the company or crypto, e.g. AAPL, SHIB-USD
             start_date (str): Start date in yyyy-mm-dd format
             end_date (str): End date in yyyy-mm-dd format
         Returns:
-            str: A formatted dataframe containing the stock price data for the specified ticker symbol in the specified date range.
+            str: A formatted dataframe containing the price data in USD for the specified ticker symbol in the specified date range.
         """
 
         result_data = interface.get_YFin_data_online(symbol, start_date, end_date)

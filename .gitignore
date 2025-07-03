@@ -1,8 +1,73 @@
-env/
+# Byte-compiled / optimized / DLL files
 __pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+pip-wheel-metadata/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# VS Code
+.vscode/
+
+# macOS
 .DS_Store
+
+# CSV and data
 *.csv
-src/
 eval_results/
 eval_data/
-*.egg-info/
+
+# Virtual environments
+env/
+venv/
+
+# Environment variables and secrets
+.env
+
+# Ignore OS junk files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Ignore logs
+*.log
+
+# End of file

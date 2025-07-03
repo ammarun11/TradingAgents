@@ -33,12 +33,16 @@ class YFinanceUtils:
         ],
         save_path: SavePathType = None,
     ) -> DataFrame:
-        """retrieve stock price data for designated ticker symbol"""
+        """retrieve stock price data for designated ticker symbol (prices in USD)"""
         ticker = symbol
         # add one day to the end_date so that the data range is inclusive
         end_date = pd.to_datetime(end_date) + pd.DateOffset(days=1)
         end_date = end_date.strftime("%Y-%m-%d")
         stock_data = ticker.history(start=start_date, end=end_date)
+        # Append USD to price columns for clarity
+        for col in ["Open", "High", "Low", "Close", "Adj Close"]:
+            if col in stock_data.columns:
+                stock_data[col] = stock_data[col].astype(str) + " USD"
         # save_output(stock_data, f"Stock data for {ticker.ticker}", save_path)
         return stock_data
 
@@ -115,3 +119,35 @@ class YFinanceUtils:
         majority_voting_result = row_0[row_0 == max_votes].index.tolist()
 
         return majority_voting_result[0], max_votes
+
+    def get_buy_sell_signal(symbol: Annotated[str, "ticker symbol"]) -> str:
+        """
+        Returns a simple 'buy', 'sell', or 'hold' signal based on the most common analyst recommendation.
+        """
+        recommendation, count = YFinanceUtils.get_analyst_recommendations(symbol)
+        if recommendation is None:
+            return "no signal"
+        recommendation = recommendation.lower()
+        if "buy" in recommendation:
+            return "buy"
+        elif "sell" in recommendation:
+            return "sell"
+        elif "hold" in recommendation:
+            return "hold"
+        else:
+            return "no signal"
+
+    def get_signal_with_price(
+        symbol: Annotated[str, "ticker symbol"],
+    ) -> dict:
+        """
+        Returns a dict with 'signal' ('buy', 'sell', 'hold', or 'no signal') and the latest closing price.
+        """
+        signal = YFinanceUtils.get_buy_sell_signal(symbol)
+        ticker = symbol
+        hist = ticker.history(period="2d")
+        if hist.empty or "Close" not in hist.columns:
+            price = None
+        else:
+            price = hist["Close"].iloc[-1]
+        return {"signal": signal, "price": price}
